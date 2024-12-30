@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Landing Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>My Blog</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to My Blog</h2>
+    <p>Discover insightful articles and stories on various topics!</p>
+  </section>
+
+  <!-- Featured Posts Section -->
+  <section class="featured-posts">
+    <h2>Featured Posts</h2>
+    <div class="posts-grid">
+      <article>
+        <img src="https://via.placeholder.com/300" alt="Post 1">
+        <h3>Post Title 1</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article>
+      <article>
+        <img src="https://via.placeholder.com/300" alt="Post 2">
+        <h3>Post Title 2</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article>
+      <article>
+        <img src="https://via.placeholder.com/300" alt="Post 3">
+        <h3>Post Title 3</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article><article>
+        <img src="https://via.placeholder.com/300" alt="Post 4">
+        <h3>Post Title 4</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article><article>
+        <img src="https://via.placeholder.com/300" alt="Post 5">
+        <h3>Post Title 5</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article><article>
+        <img src="https://via.placeholder.com/300" alt="Post 6">
+        <h3>Post Title 6</h3>
+        <p>Short description of the post goes here...</p>
+        <a href="#">Read More</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Add this section above the footer -->
+<section class="forms">
+  <h2>Create a New Post</h2>
+  <form onsubmit="createPost(event)">
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="text" id="description" placeholder="Description" required>
+    <input type="text" id="image" placeholder="Image URL" required>
+    <button type="submit">Create Post</button>
+  </form>
+
+  <h2>Update a Post</h2>
+  <form onsubmit="updatePost(event)">
+    <input type="number" id="update-id" placeholder="Post ID" required>
+    <input type="text" id="update-title" placeholder="Title" required>
+    <input type="text" id="update-description" placeholder="Description" required>
+    <input type="text" id="update-image" placeholder="Image URL" required>
+    <button type="submit">Update Post</button>
+  </form>
+</section>
+
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 My Blog. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#">Facebook</a> | 
+      <a href="#">Twitter</a> | 
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
