@@ -66,35 +66,29 @@ Edit
 ```bash
 git clone https://github.com/your-username/smartcart.git
 cd smartcart
+```
 2. Install dependencies
-bash
-Copy
-Edit
+```
 npm install
 # or
 yarn install
+```
 3. Start the development server
-bash
-Copy
-Edit
+```
 npm run dev
 # or
 yarn dev
+```
 4. Build for production
-bash
-Copy
-Edit
+```
 npm run build
+```
 🔐 Environment Variables
 If your project uses authentication or APIs, add the following in a .env file:
-
-ini
-Copy
-Edit
+```
 VITE_API_BASE_URL=https://your-backend-api.com
 VITE_AUTH_SECRET=your-auth-token-key
-📸 Screenshots
-Home Page	Product Page
+```
 
 🤖 AI Chatbot
 SmartCart includes a floating AI Assistant powered by a local API function (sendChatMessage). You can hook it to OpenAI, Langchain, or any other LLM backend for a conversational shopping experience.
@@ -111,7 +105,7 @@ Dark mode support
 Infinite scroll and search functionality
 
 🙌 Contributors
-Your Name – Project Lead & Full Stack Developer
+ANVESH SRIVASTAVA – Project Lead & Full Stack Developer
 
 📄 License
 This project is licensed under the MIT License.
