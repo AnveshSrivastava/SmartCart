@@ -16,6 +16,8 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import CategoryPage from './pages/CategoryPage';
+import About from './pages/About';
+import Support from './pages/Support';
 import './App.css';
 
 const pageVariants = {
@@ -120,6 +122,34 @@ function App() {
                       transition={pageTransition}
                     >
                       <CategoryPage />
+                    </motion.div>
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={
+                    <motion.div
+                      variants={pageVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={pageTransition}
+                    >
+                      <About />
+                    </motion.div>
+                  }
+                />
+                <Route
+                  path="/support"
+                  element={
+                    <motion.div
+                      variants={pageVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={pageTransition}
+                    >
+                      <Support />
                     </motion.div>
                   }
                 />

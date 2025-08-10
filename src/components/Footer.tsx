@@ -110,11 +110,11 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2 text-gray-400">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+91 xxxx xxxx xx</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-400">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm">San Francisco, CA</span>
+                <span className="text-sm">New Delhi, India</span>
               </div>
             </div>
           </div>
