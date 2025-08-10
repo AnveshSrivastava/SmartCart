@@ -1,7 +1,16 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, AuthContextType } from '../types';
-import { login as apiLogin, register as apiRegister } from '../utils/api';
+import { authAPI } from '../services/api';
 import { toast } from 'sonner';
+import { jwtDecode } from 'jwt-decode';
+
+interface JWTPayload {
+  sub: string;
+  userId: string;
+  role: string;
+  exp: number;
+  iat: number;
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -23,11 +32,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    const savedUser = localStorage.getItem('user');
     
-    if (token && savedUser) {
+    if (token) {
       try {
-        setUser(JSON.parse(savedUser));
+        const decoded = jwtDecode<JWTPayload>(token);
+        
+        // Check if token is expired
+        if (decoded.exp * 1000 < Date.now()) {
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('user');
+        } else {
+          const savedUser = localStorage.getItem('user');
+          if (savedUser) {
+            setUser(JSON.parse(savedUser));
+          }
+        }
       } catch (error) {
         console.error('Error parsing saved user:', error);
         localStorage.removeItem('authToken');
@@ -40,15 +59,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      const response = await apiLogin(email, password);
+      const response = await authAPI.login(email, password);
       
-      localStorage.setItem('authToken', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      setUser(response.user);
+      if (response.success) {
+        localStorage.setItem('authToken', response.token);
+        
+        const user: User = {
+          id: response.userId,
+          email: response.email,
+          fullName: response.fullName,
+          role: response.role as 'USER' | 'ADMIN'
+        };
+        
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+        
+        toast.success('Login successful!');
+      } else {
+        throw new Error(response.message || 'Login failed');
+      }
       
-      toast.success('Login successful!');
     } catch (error) {
-      toast.error('Invalid credentials. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Invalid credentials. Please try again.';
+      toast.error(errorMessage);
       throw error;
     } finally {
       setIsLoading(false);
@@ -58,15 +91,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (email: string, password: string, name: string) => {
     try {
       setIsLoading(true);
-      const response = await apiRegister(email, password, name);
+      const response = await authAPI.register(email, password, name);
       
-      localStorage.setItem('authToken', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      setUser(response.user);
+      if (response.success) {
+        localStorage.setItem('authToken', response.token);
+        
+        const user: User = {
+          id: response.userId,
+          email: response.email,
+          fullName: response.fullName,
+          role: response.role as 'USER' | 'ADMIN'
+        };
+        
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+        
+        toast.success('Registration successful!');
+      } else {
+        throw new Error(response.message || 'Registration failed');
+      }
       
-      toast.success('Registration successful!');
     } catch (error) {
-      toast.error('Registration failed. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Registration failed. Please try again.';
+      toast.error(errorMessage);
       throw error;
     } finally {
       setIsLoading(false);

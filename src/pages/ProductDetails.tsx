@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, ShoppingCart, ArrowLeft, Truck, Shield, RefreshCw } from 'lucide-react';
+import { Star, ShoppingCart, ArrowLeft, Truck, Shield, RefreshCw, Heart, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Product } from '../types';
-import { fetchProductById } from '../utils/api';
+import { productsAPI } from '../services/api';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { toast } from 'sonner';
-import { Heart, Share2 } from 'lucide-react';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { user } = useAuth();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -25,7 +26,7 @@ const ProductDetails: React.FC = () => {
       if (!id) return;
       
       try {
-        const data = await fetchProductById(id);
+        const data = await productsAPI.getById(id);
         setProduct(data);
       } catch (error) {
         console.error('Error loading product:', error);
@@ -40,12 +41,20 @@ const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
-    addToCart(product, quantity);
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    addToCart(product.id, quantity);
   };
 
   const handleBuyNow = () => {
     if (!product) return;
-    addToCart(product, quantity);
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    addToCart(product.id, quantity);
     navigate('/cart');
   };
 
@@ -112,8 +121,8 @@ const ProductDetails: React.FC = () => {
             <Card className="overflow-hidden border-0 shadow-lg">
               <CardContent className="p-0">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={product.imageUrl}
+                  alt={product.title}
                   className="w-full h-96 object-cover"
                 />
               </CardContent>
@@ -132,17 +141,17 @@ const ProductDetails: React.FC = () => {
                 {product.category}
               </Badge>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {product.name}
+                {product.title}
               </h1>
               
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center space-x-1">
                   <Star className="h-5 w-5 text-yellow-400 fill-current" />
                   <span className="font-medium">{product.rating}</span>
-                  <span className="text-gray-500">({product.reviews} reviews)</span>
+                  <span className="text-gray-500">({product.reviewCount} reviews)</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                <Button
+                  <Button
                     className="group bg-black hover:bg-white transition-colors duration-200 rounded-xl p-2 flex items-center justify-center"
                     style={{ width: '40px', height: '40px' }} // consistent size
                     aria-label="Add to wishlist"
@@ -156,10 +165,7 @@ const ProductDetails: React.FC = () => {
                     aria-label="Share product"
                   >
                     <Share2 className="w-5 h-5 text-white group-hover:text-black transition-colors" />
-                </Button>
-
-
-
+                  </Button>
                 </div>
               </div>
 
@@ -200,7 +206,7 @@ const ProductDetails: React.FC = () => {
               <div className="flex space-x-4">
                 <Button
                   onClick={handleAddToCart}
-                  disabled={!product.inStock}
+                  disabled={product.stock === 0}
                   className="flex-1"
                   variant="outline"
                 >
@@ -209,15 +215,19 @@ const ProductDetails: React.FC = () => {
                 </Button>
                 <Button
                   onClick={handleBuyNow}
-                  disabled={!product.inStock}
+                  disabled={product.stock === 0}
                   className="flex-1 bg-blue-600 hover:bg-blue-700"
                 >
                   Buy Now
                 </Button>
               </div>
 
-              {!product.inStock && (
+              {product.stock === 0 && (
                 <p className="text-red-500 text-sm">This product is currently out of stock.</p>
+              )}
+              
+              {product.stock > 0 && product.stock <= 5 && (
+                <p className="text-orange-500 text-sm">Only {product.stock} left in stock!</p>
               )}
             </div>
 

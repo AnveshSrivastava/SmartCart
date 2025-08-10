@@ -113,6 +113,10 @@ public class OrderService {
         return orderRepository.findPendingAndConfirmedOrders();
     }
     
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+    
     private OrderItem convertCartItemToOrderItem(CartItem cartItem) {
         return OrderItem.builder()
                 .productId(cartItem.getProductId())

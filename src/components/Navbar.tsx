@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, User, Menu, X, LogOut, Package, Bot } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, LogOut, Package, Bot, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -32,10 +32,14 @@ const Navbar: React.FC = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
     { path: '/support', label: 'Support' },
-    { path: '/orders', label: 'Orders', protected: true },
+    { path: '/orders', label: 'Orders', protected: true, role: 'USER' },
   ];
+
+  // Don't show user navbar on admin pages
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <motion.nav
@@ -57,10 +61,10 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <CategoryDropdown />
+            {user?.role !== 'ADMIN' && <CategoryDropdown />}
 
             {navItems.map((item) => (
-              (!item.protected || user) && (
+              (!item.protected || (user && (!item.role || user.role === item.role))) && (
                 <Link
                   key={item.path}
                   to={item.path}
@@ -79,23 +83,25 @@ const Navbar: React.FC = () => {
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
             {/* Cart */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate('/cart')}
-              className="group relative bg-black hover:bg-white rounded-xl p-2 transition-all duration-200 z-40">
-              <ShoppingCart className="h-6 w-6 text-white group-hover:text-black transition-colors duration-200" />
-              
-              {getTotalItems() > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium z-50"
-                >
-                  {getTotalItems()}
-                </motion.span>
-              )}
-            </Button>
+            {user?.role !== 'ADMIN' && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate('/cart')}
+                className="group relative bg-black hover:bg-white rounded-xl p-2 transition-all duration-200 z-40">
+                <ShoppingCart className="h-6 w-6 text-white group-hover:text-black transition-colors duration-200" />
+                
+                {getTotalItems() > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium z-50"
+                  >
+                    {getTotalItems()}
+                  </motion.span>
+                )}
+              </Button>
+            )}
 
             {/* User Menu */}
             {user ? (
@@ -111,15 +117,23 @@ const Navbar: React.FC = () => {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium">{user.name}</p>
+                      <p className="text-sm font-medium">{user.fullName}</p>
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate('/orders')}>
-                    <Package className="mr-2 h-4 w-4" />
-                    Orders
-                  </DropdownMenuItem>
+                  {user.role === 'USER' && (
+                    <DropdownMenuItem onClick={() => navigate('/orders')}>
+                      <Package className="mr-2 h-4 w-4" />
+                      Orders
+                    </DropdownMenuItem>
+                  )}
+                  {user.role === 'ADMIN' && (
+                    <DropdownMenuItem onClick={() => navigate('/admin/dashboard')}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      Admin Dashboard
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
@@ -188,7 +202,7 @@ const Navbar: React.FC = () => {
 
               <div className="border-t border-gray-200 pt-4">
               {navItems.map((item) => (
-                (!item.protected || user) && (
+                (!item.protected || (user && (!item.role || user.role === item.role))) && (
                   <Link
                     key={item.path}
                     to={item.path}

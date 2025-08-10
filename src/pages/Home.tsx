@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProductCard from '../components/ProductCard';
 import { Product } from '../types';
-import { fetchProducts } from '../utils/api';
+import { productsAPI } from '../services/api';
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -20,7 +19,8 @@ const Home: React.FC = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const data = await fetchProducts();
+        setLoading(true);
+        const data = await productsAPI.getAll();
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
     // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -156,7 +156,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 responsive-grid"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {filteredProducts.map((product, index) => (
               <ProductCard key={product.id} product={product} index={index} />

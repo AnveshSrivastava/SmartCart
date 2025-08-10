@@ -18,6 +18,11 @@ import Orders from './pages/Orders';
 import CategoryPage from './pages/CategoryPage';
 import About from './pages/About';
 import Support from './pages/Support';
+import AdminLayout from './pages/admin/AdminLayout';
+import Dashboard from './pages/admin/Dashboard';
+import ProductManagement from './pages/admin/ProductManagement';
+import OrderManagement from './pages/admin/OrderManagement';
+import StockAlerts from './pages/admin/StockAlerts';
 import './App.css';
 
 const pageVariants = {
@@ -156,7 +161,7 @@ function App() {
                 <Route
                   path="/checkout"
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute requiredRole="USER">
                       <motion.div
                         variants={pageVariants}
                         initial="initial"
@@ -172,7 +177,7 @@ function App() {
                 <Route
                   path="/orders"
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute requiredRole="USER">
                       <motion.div
                         variants={pageVariants}
                         initial="initial"
@@ -185,11 +190,82 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                
+                {/* Admin Routes */}
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute requiredRole="ADMIN">
+                      <AdminLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route
+                    path="dashboard"
+                    element={
+                      <motion.div
+                        variants={pageVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={pageTransition}
+                      >
+                        <Dashboard />
+                      </motion.div>
+                    }
+                  />
+                  <Route
+                    path="products"
+                    element={
+                      <motion.div
+                        variants={pageVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={pageTransition}
+                      >
+                        <ProductManagement />
+                      </motion.div>
+                    }
+                  />
+                  <Route
+                    path="orders"
+                    element={
+                      <motion.div
+                        variants={pageVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={pageTransition}
+                      >
+                        <OrderManagement />
+                      </motion.div>
+                    }
+                  />
+                  <Route
+                    path="stock-alerts"
+                    element={
+                      <motion.div
+                        variants={pageVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={pageTransition}
+                      >
+                        <StockAlerts />
+                      </motion.div>
+                    }
+                  />
+                </Route>
               </Routes>
             </AnimatePresence>
 
-            <Footer />
-            <ChatbotWidget />
+            {!window.location.pathname.startsWith('/admin') && (
+              <>
+                <Footer />
+                <ChatbotWidget />
+              </>
+            )}
             <Toaster position="top-right" />
           </div>
         </Router>

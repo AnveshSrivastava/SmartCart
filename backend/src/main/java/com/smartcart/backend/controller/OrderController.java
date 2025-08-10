@@ -157,6 +157,23 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
     
+    @GetMapping("/admin/stats")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Object>> getOrderStats() {
+        log.info("Fetching order statistics");
+        List<Order> allOrders = orderService.getAllOrders();
+        
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalOrders", allOrders.size());
+        stats.put("pendingOrders", allOrders.stream().filter(o -> o.getStatus() == Order.Status.PENDING).count());
+        stats.put("confirmedOrders", allOrders.stream().filter(o -> o.getStatus() == Order.Status.CONFIRMED).count());
+        stats.put("shippedOrders", allOrders.stream().filter(o -> o.getStatus() == Order.Status.SHIPPED).count());
+        stats.put("deliveredOrders", allOrders.stream().filter(o -> o.getStatus() == Order.Status.DELIVERED).count());
+        stats.put("totalSales", allOrders.stream().mapToDouble(o -> o.getTotal().doubleValue()).sum());
+        
+        return ResponseEntity.ok(stats);
+    }
+    
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getOrderStats(Authentication authentication) {
         String userId = getUserIdFromAuthentication(authentication);

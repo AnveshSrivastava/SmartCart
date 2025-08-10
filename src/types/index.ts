@@ -1,41 +1,65 @@
 export interface Product {
   id: string;
-  name: string;
+  title: string;
   price: number;
-  image: string;
+  imageUrl: string;
   category: string;
   description: string;
   rating: number;
-  reviews: number;
-  inStock: boolean;
+  reviewCount: number;
+  stock: number;
+  active: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CartItem {
   id: string;
-  product: Product;
+  productId: string;
   quantity: number;
+  productTitle: string;
+  productImageUrl: string;
+  productPrice: number;
+}
+
+export interface Cart {
+  id: string;
+  userId: string;
+  items: CartItem[];
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface User {
   id: string;
   email: string;
-  name: string;
+  fullName: string;
+  role: 'USER' | 'ADMIN';
   avatar?: string;
+}
+
+export interface OrderItem {
+  id: string;
+  productId: string;
+  productTitle: string;
+  productImageUrl: string;
+  quantity: number;
+  price: number;
+  total: number;
 }
 
 export interface Order {
   id: string;
-  items: CartItem[];
+  userId: string;
+  items: OrderItem[];
   total: number;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered';
-  date: string;
-  shippingAddress: {
-    name: string;
-    street: string;
-    city: string;
-    zip: string;
-    country: string;
-  };
+  status: 'PENDING' | 'CONFIRMED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+  shippingAddress: string;
+  paymentInfo?: string;
+  trackingNumber?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ChatMessage {
@@ -51,4 +75,24 @@ export interface AuthContextType {
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
+}
+
+export interface AdminStats {
+  totalProducts: number;
+  totalOrders: number;
+  totalSales: number;
+  pendingOrders: number;
+  lowStockProducts: number;
+}
+
+export interface ProductFormData {
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  imageUrl: string;
+  rating?: number;
+  reviewCount?: number;
+  active: boolean;
 }

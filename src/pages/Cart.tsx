@@ -6,10 +6,42 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCart } from '../context/CartContext';
+import { productsAPI } from '../services/api';
+import { useState, useEffect } from 'react';
+import { Product } from '../types';
 
 const Cart: React.FC = () => {
-  const { items, updateQuantity, removeFromCart, getTotalPrice } = useCart();
+  const { items, updateQuantity, removeFromCart, getTotalPrice, loading } = useCart();
   const navigate = useNavigate();
+  const [products, setProducts] = useState<{ [key: string]: Product }>({});
+
+  useEffect(() => {
+    const loadProductDetails = async () => {
+      const productPromises = items.map(async (item) => {
+        try {
+          const product = await productsAPI.getById(item.productId);
+          return { [item.productId]: product };
+        } catch (error) {
+          console.error(`Error loading product ${item.productId}:`, error);
+          return null;
+        }
+      });
+
+      const productResults = await Promise.all(productPromises);
+      const productsMap = productResults.reduce((acc, result) => {
+        if (result) {
+          return { ...acc, ...result };
+        }
+        return acc;
+      }, {});
+
+      setProducts(productsMap);
+    };
+
+    if (items.length > 0) {
+      loadProductDetails();
+    }
+  }, [items]);
 
   const handleCheckout = () => {
     navigate('/checkout');
@@ -67,17 +99,17 @@ const Cart: React.FC = () => {
                       className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm"
                     >
                       <img
-                        src={item.product.image}
-                        alt={item.product.name}
+                        src={item.productImageUrl}
+                        alt={item.productTitle}
                         className="w-16 h-16 object-cover rounded-lg"
                       />
                       
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900">
-                          {item.product.name}
+                          {item.productTitle}
                         </h3>
                         <p className="text-sm text-gray-600">
-                          ${item.product.price}
+                          ${item.productPrice}
                         </p>
                       </div>
 
@@ -85,7 +117,7 @@ const Cart: React.FC = () => {
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                           className="w-8 h-8 p-0 flex items-center justify-center text-gray-700 hover:bg-gray-100 disabled:opacity-50"
                         >
@@ -97,7 +129,7 @@ const Cart: React.FC = () => {
                         <Button
                           variant="outline"
                           size="icon"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                           className="w-8 h-8 p-0 flex items-center justify-center text-gray-700 hover:bg-gray-100"
                         >
                           <Plus className="w-4 h-4" />
@@ -107,12 +139,12 @@ const Cart: React.FC = () => {
 
                       <div className="text-right">
                         <div className="font-semibold text-lg">
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          ${(item.productPrice * item.quantity).toFixed(2)}
                         </div>
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => removeFromCart(item.product.id)}
+                          onClick={() => removeFromCart(item.productId)}
                           className="text-red-500 hover:text-red-700 mt-1"
                         >
                           <Trash2 className="h-4 w-4" />

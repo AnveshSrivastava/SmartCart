@@ -25,7 +25,19 @@ const Login: React.FC = () => {
 
     try {
       await login(email, password);
-      navigate(from, { replace: true });
+      
+      // Get updated user from localStorage after login
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        if (user.role === 'ADMIN') {
+          navigate('/admin/dashboard', { replace: true });
+        } else {
+          navigate(from, { replace: true });
+        }
+      } else {
+        navigate(from, { replace: true });
+      }
     } catch (error) {
       console.error('Login error:', error);
     } finally {

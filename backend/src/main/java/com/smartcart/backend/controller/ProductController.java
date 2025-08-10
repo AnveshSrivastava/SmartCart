@@ -93,6 +93,24 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
     
+    @GetMapping("/admin/stats")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Object>> getProductStats() {
+        log.info("Fetching product statistics");
+        List<Product> allProducts = productService.getAllProducts();
+        List<Product> lowStockProducts = allProducts.stream()
+                .filter(product -> product.getStock() < 5)
+                .toList();
+        
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalProducts", allProducts.size());
+        stats.put("activeProducts", allProducts.stream().filter(Product::isActive).count());
+        stats.put("lowStockProducts", lowStockProducts.size());
+        stats.put("outOfStockProducts", allProducts.stream().filter(p -> p.getStock() == 0).count());
+        
+        return ResponseEntity.ok(stats);
+    }
+    
     @PostMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDTO productDTO) {
