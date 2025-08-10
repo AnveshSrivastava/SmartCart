@@ -308,13 +308,14 @@ const About: React.FC = () => {
                 Start Shopping Now
               </Button>
               <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-white text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl px-8 py-3 text-lg"
-                onClick={() => window.location.href = '/support'}
-              >
-                Contact Support
-              </Button>
+  variant="outline" 
+  size="lg" 
+  className="border-white text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl px-8 py-3 text-lg"
+  onClick={() => window.location.href = '/support'}
+>
+  Contact Support
+</Button>
+
             </div>
           </motion.div>
         </div>
