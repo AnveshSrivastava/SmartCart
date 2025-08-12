@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Skeleton } from '@/components/ui/skeleton';
 import ProductCard from '../components/ProductCard';
 import { Product } from '../types';
-import { fetchProductsByCategory } from '../utils/api';
+import { productsAPI } from '../utils/api';
 
 const CategoryPage: React.FC = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
@@ -24,7 +24,7 @@ const CategoryPage: React.FC = () => {
       
       try {
         setLoading(true);
-        const data = await fetchProductsByCategory(categoryName);
+        const data = await productsAPI.getByCategory(categoryName);
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {

@@ -260,3 +260,29 @@ export const adminAPI = {
 };
 
 export default api;
+
+// Legacy API functions for backward compatibility
+export const sendChatMessage = async (message: string) => {
+  // Mock chatbot response - replace with actual AI service integration
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const responses = [
+        "Hello! How can I help you today?",
+        "I'm here to assist you with your shopping needs.",
+        "Feel free to ask me about our products or services.",
+        "Is there anything specific you're looking for?",
+        "I can help you find the perfect product for your needs."
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      resolve({ message: randomResponse });
+    }, 1000);
+  });
+};
+
+export const fetchProductsByCategory = async (category: string) => {
+  return productsAPI.getByCategory(category);
+};
+
+export const fetchOrders = async () => {
+  return ordersAPI.getHistory();
+};

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Order } from '../types';
-import { fetchOrders } from '../utils/api';
+import { ordersAPI } from '../utils/api';
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -14,7 +14,7 @@ const Orders: React.FC = () => {
   useEffect(() => {
     const loadOrders = async () => {
       try {
-        const data = await fetchOrders();
+        const data = await ordersAPI.getHistory();
         // Mock orders for demonstration
         const mockOrders: Order[] = [
           {
