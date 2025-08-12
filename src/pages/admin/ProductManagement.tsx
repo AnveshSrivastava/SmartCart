@@ -103,7 +103,7 @@ const ProductManagement: React.FC = () => {
   };
 
   const handleDeleteProduct = async (product: Product) => {
-    if (!confirm(`Are you sure you want to delete "${product.title}"?`)) {
+    if (!window.confirm(`Are you sure you want to delete "${product.title}"?`)) {
       return;
     }
 
@@ -113,7 +113,8 @@ const ProductManagement: React.FC = () => {
       loadProducts();
     } catch (error) {
       console.error('Error deleting product:', error);
-      toast.error('Failed to delete product');
+      const errorMessage = error?.response?.data?.message || 'Failed to delete product';
+      toast.error(errorMessage);
     }
   };
 

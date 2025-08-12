@@ -3,6 +3,8 @@ package com.smartcart.backend.controller;
 import com.smartcart.backend.model.Cart;
 import com.smartcart.backend.service.CartService;
 import com.smartcart.backend.util.JwtUtil;
+import com.smartcart.backend.repository.UserRepository;
+import com.smartcart.backend.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ public class CartController {
     
     private final CartService cartService;
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
     
     @GetMapping
     public ResponseEntity<Cart> getUserCart(Authentication authentication) {
@@ -119,10 +122,15 @@ public class CartController {
     }
     
     private String getUserIdFromAuthentication(Authentication authentication) {
-        if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.UserDetails) {
-            // Extract user ID from JWT token if available
-            // For now, we'll use the email as a fallback
-            return authentication.getName();
+        if (authentication != null && authentication.getPrincipal() instanceof com.smartcart.backend.model.User) {
+            User user = (User) authentication.getPrincipal();
+            return user.getId();
+        } else if (authentication != null) {
+            // Fallback to email-based lookup
+            String email = authentication.getName();
+            return userRepository.findByEmail(email)
+                    .map(User::getId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
         }
         throw new RuntimeException("User not authenticated");
     }

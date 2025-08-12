@@ -32,7 +32,7 @@ const ProductDetails: React.FC = () => {
         console.error('Error loading product:', error);
         toast.error('Error loading product details');
       } finally {
-        setLoading(false);
+          return a.title.localeCompare(b.title);
       }
     };
 

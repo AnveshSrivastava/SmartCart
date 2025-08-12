@@ -78,7 +78,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       }
     } catch (error) {
       console.error('Error adding to cart:', error);
-      toast.error('Failed to add item to cart');
+      const errorMessage = error?.response?.data?.message || 'Failed to add item to cart';
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

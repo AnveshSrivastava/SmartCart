@@ -2,6 +2,8 @@ package com.smartcart.backend.controller;
 
 import com.smartcart.backend.model.Order;
 import com.smartcart.backend.service.OrderService;
+import com.smartcart.backend.repository.UserRepository;
+import com.smartcart.backend.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,7 @@ import java.util.Optional;
 public class OrderController {
     
     private final OrderService orderService;
+    private final UserRepository userRepository;
     
     @PostMapping("/place")
     public ResponseEntity<Order> placeOrder(
@@ -197,10 +200,15 @@ public class OrderController {
     }
     
     private String getUserIdFromAuthentication(Authentication authentication) {
-        if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.UserDetails) {
-            // Extract user ID from JWT token if available
-            // For now, we'll use the email as a fallback
-            return authentication.getName();
+        if (authentication != null && authentication.getPrincipal() instanceof com.smartcart.backend.model.User) {
+            User user = (User) authentication.getPrincipal();
+            return user.getId();
+        } else if (authentication != null) {
+            // Fallback to email-based lookup
+            String email = authentication.getName();
+            return userRepository.findByEmail(email)
+                    .map(User::getId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
         }
         throw new RuntimeException("User not authenticated");
     }

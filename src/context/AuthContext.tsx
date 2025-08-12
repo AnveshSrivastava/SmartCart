@@ -80,7 +80,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Invalid credentials. Please try again.';
+      console.error('Login error:', error);
+      const errorMessage = error?.response?.data?.message || error?.message || 'Invalid credentials. Please try again.';
       toast.error(errorMessage);
       throw error;
     } finally {
@@ -112,7 +113,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Registration failed. Please try again.';
+      console.error('Registration error:', error);
+      const errorMessage = error?.response?.data?.message || error?.message || 'Registration failed. Please try again.';
       toast.error(errorMessage);
       throw error;
     } finally {

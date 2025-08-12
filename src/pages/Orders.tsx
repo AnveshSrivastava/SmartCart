@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Order } from '../types';
-import { ordersAPI } from '../utils/api';
+import { ordersAPI } from '../services/api';
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -15,87 +15,11 @@ const Orders: React.FC = () => {
     const loadOrders = async () => {
       try {
         const data = await ordersAPI.getHistory();
-        // Mock orders for demonstration
-        const mockOrders: Order[] = [
-          {
-            id: 'ORD-001',
-            items: [
-              {
-                id: '1',
-                product: {
-                  id: '1',
-                  name: 'Wireless Bluetooth Headphones',
-                  price: 79.99,
-                  image: 'https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=300',
-                  category: 'Electronics',
-                  description: 'High-quality wireless headphones with noise cancellation',
-                  rating: 4.5,
-                  reviews: 128,
-                  inStock: true,
-                },
-                quantity: 1,
-              },
-              {
-                id: '2',
-                product: {
-                  id: '2',
-                  name: 'Smart Watch Series 8',
-                  price: 399.99,
-                  image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg?auto=compress&cs=tinysrgb&w=300',
-                  category: 'Electronics',
-                  description: 'Advanced smart watch with health monitoring features',
-                  rating: 4.8,
-                  reviews: 256,
-                  inStock: true,
-                },
-                quantity: 1,
-              },
-            ],
-            total: 479.98,
-            status: 'delivered',
-            date: '2024-01-15',
-            shippingAddress: {
-              name: 'John Doe',
-              street: '123 Main St',
-              city: 'San Francisco',
-              zip: '94102',
-              country: 'USA',
-            },
-          },
-          {
-            id: 'ORD-002',
-            items: [
-              {
-                id: '3',
-                product: {
-                  id: '3',
-                  name: 'Organic Cotton T-Shirt',
-                  price: 29.99,
-                  image: 'https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=300',
-                  category: 'Clothing',
-                  description: 'Comfortable organic cotton t-shirt in various colors',
-                  rating: 4.3,
-                  reviews: 89,
-                  inStock: true,
-                },
-                quantity: 2,
-              },
-            ],
-            total: 59.98,
-            status: 'shipped',
-            date: '2024-01-20',
-            shippingAddress: {
-              name: 'John Doe',
-              street: '123 Main St',
-              city: 'San Francisco',
-              zip: '94102',
-              country: 'USA',
-            },
-          },
-        ];
-        setOrders(mockOrders);
+        setOrders(data);
       } catch (error) {
         console.error('Error loading orders:', error);
+        // Show empty state if no orders or error
+        setOrders([]);
       } finally {
         setLoading(false);
       }
@@ -197,7 +121,7 @@ const Orders: React.FC = () => {
                       </Badge>
                     </div>
                     <div className="flex items-center space-x-4 text-sm text-gray-600">
-                      <span>Placed on {new Date(order.date).toLocaleDateString()}</span>
+                      <span>Placed on {new Date(order.createdAt).toLocaleDateString()}</span>
                       <span>•</span>
                       <span>Total: ${order.total.toFixed(2)}</span>
                     </div>
@@ -209,18 +133,18 @@ const Orders: React.FC = () => {
                         {order.items.map((item) => (
                           <div key={item.id} className="flex items-center space-x-4">
                             <img
-                              src={item.product.image}
-                              alt={item.product.name}
+                              src={item.productImageUrl}
+                              alt={item.productTitle}
                               className="w-16 h-16 object-cover rounded-lg"
                             />
                             <div className="flex-1">
-                              <h4 className="font-medium">{item.product.name}</h4>
+                              <h4 className="font-medium">{item.productTitle}</h4>
                               <p className="text-sm text-gray-600">
-                                Quantity: {item.quantity} • ${item.product.price}
+                                Quantity: {item.quantity} • ${item.price}
                               </p>
                             </div>
                             <div className="font-semibold">
-                              ${(item.product.price * item.quantity).toFixed(2)}
+                              ${item.total.toFixed(2)}
                             </div>
                           </div>
                         ))}
@@ -233,10 +157,7 @@ const Orders: React.FC = () => {
                           <div className="text-sm">
                             <p className="font-medium">Shipping Address:</p>
                             <p className="text-gray-600">
-                              {order.shippingAddress.name}<br />
-                              {order.shippingAddress.street}<br />
-                              {order.shippingAddress.city}, {order.shippingAddress.zip}<br />
-                              {order.shippingAddress.country}
+                              {order.shippingAddress}
                             </p>
                           </div>
                         </div>

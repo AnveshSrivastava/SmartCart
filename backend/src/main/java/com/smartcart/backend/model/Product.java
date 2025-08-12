@@ -52,7 +52,7 @@ public class Product {
     private Integer reviewCount = 0;
     
     @NotNull(message = "Product stock is required")
-    @Positive(message = "Stock must be positive")
+    @jakarta.validation.constraints.PositiveOrZero(message = "Stock must be zero or positive")
     private Integer stock;
     
     private String imageUrl;

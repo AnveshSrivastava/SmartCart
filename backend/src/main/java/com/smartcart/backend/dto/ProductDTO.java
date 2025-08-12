@@ -39,7 +39,7 @@ public class ProductDTO {
     private Integer reviewCount;
     
     @NotNull(message = "Product stock is required")
-    @Positive(message = "Stock must be positive")
+    @jakarta.validation.constraints.PositiveOrZero(message = "Stock must be zero or positive")
     private Integer stock;
     
     private String imageUrl;

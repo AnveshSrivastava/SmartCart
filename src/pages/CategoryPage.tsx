@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Skeleton } from '@/components/ui/skeleton';
 import ProductCard from '../components/ProductCard';
 import { Product } from '../types';
-import { productsAPI } from '../utils/api';
+import { productsAPI } from '../services/api';
 
 const CategoryPage: React.FC = () => {
   const { categoryName } = useParams<{ categoryName: string }>();

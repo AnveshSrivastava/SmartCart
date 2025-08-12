@@ -279,16 +279,16 @@ const Checkout: React.FC = () => {
                     {items.map((item) => (
                       <div key={item.id} className="flex items-center space-x-3">
                         <img
-                          src={item.product.image}
-                          alt={item.product.name}
+                          src={item.productImageUrl}
+                          alt={item.productTitle}
                           className="w-12 h-12 object-cover rounded"
                         />
                         <div className="flex-1">
-                          <h4 className="font-medium text-sm">{item.product.name}</h4>
+                          <h4 className="font-medium text-sm">{item.productTitle}</h4>
                           <p className="text-xs text-gray-600">Qty: {item.quantity}</p>
                         </div>
                         <span className="font-semibold">
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          ${(item.productPrice * item.quantity).toFixed(2)}
                         </span>
                       </div>
                     ))}
