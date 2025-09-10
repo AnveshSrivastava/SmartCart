@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, Send, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChatMessage } from '../types';
 import { sendChatMessage } from '../services/api';
@@ -40,13 +39,13 @@ const ChatbotWidget: React.FC = () => {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev: ChatMessage[]) => [...prev, userMessage]);
     setInputMessage('');
     setIsLoading(true);
 
     try {
-      const response = await sendChatMessage(inputMessage);
-      setMessages(prev => [...prev, response]);
+      const response: ChatMessage = await sendChatMessage(inputMessage); // ✅ typecast
+      setMessages((prev: ChatMessage[]) => [...prev, response]);
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: ChatMessage = {
@@ -55,7 +54,7 @@ const ChatbotWidget: React.FC = () => {
         content: "I'm sorry, I'm having trouble responding right now. Please try again later.",
         timestamp: new Date(),
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev: ChatMessage[]) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -97,24 +96,22 @@ const ChatbotWidget: React.FC = () => {
             className="fixed bottom-24 right-6 z-[60] w-80 h-[400px] md:w-96 md:h-[500px]"
           >
             <Card className="h-full flex flex-col shadow-2xl border-0 bg-white/95 backdrop-blur-md rounded-2xl overflow-hidden z-[60]">
-            <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex-shrink-0">
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center space-x-2">
-                  <Bot className="h-5 w-5 text-white" />
-                  <span>SmartCart AI</span>
-                </CardTitle>
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex-shrink-0">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center space-x-2">
+                    <Bot className="h-5 w-5 text-white" />
+                    <span>SmartCart AI</span>
+                  </CardTitle>
 
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-full hover:bg-white/20 transition"
-                  aria-label="Close"
-                >
-                  <X className="w-6 h-6 text-white" />
-                </button>
-              </div>
-            </CardHeader>
-
-
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-full hover:bg-white/20 transition"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6 text-white" />
+                  </button>
+                </div>
+              </CardHeader>
 
               <CardContent className="flex-1 p-0 flex flex-col min-h-0">
                 <div className="flex-1 overflow-y-auto p-4 min-h-0 max-h-[300px] scroll-smooth">

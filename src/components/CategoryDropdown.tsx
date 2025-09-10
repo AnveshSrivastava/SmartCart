@@ -10,13 +10,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const categories = [
-  { label: 'Electronics', value: 'electronics' },
-  { label: 'Clothing', value: 'clothing' },
-  { label: 'Food', value: 'food' },
-  { label: 'Sports', value: 'sports' },
-  { label: 'Furniture', value: 'furniture' },
-  { label: 'Books', value: 'books' },
-  { label: 'Beauty', value: 'beauty' },
+  { label: 'Electronics', value: 'Electronics' },
+  { label: 'Clothing', value: 'Clothing' },
+  { label: 'Food', value: 'Food' },
+  { label: 'Sports', value: 'Sports' },
+  { label: 'Furniture', value: 'Furniture' },
+  { label: 'Books', value: 'Books' },
+  { label: 'Beauty', value: 'Beauty' },
 ];
 
 const CategoryDropdown: React.FC = () => {

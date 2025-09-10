@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, User, Menu, X, LogOut, Package, Bot, Settings } from 'lucide-react';
+import { ShoppingCart, Menu, X, LogOut, Package, Bot, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -109,8 +109,8 @@ const Navbar: React.FC = () => {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="hover:bg-blue-50 rounded-xl p-2 transition-all duration-200">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={user.avatar} alt={user.name} />
-                      <AvatarFallback>{user?.name?.charAt(0) ?? ''}</AvatarFallback>
+                      <AvatarImage src={user.avatar} alt={user.fullName} />
+                      <AvatarFallback>{user?.fullName?.charAt(0) ?? ''}</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>

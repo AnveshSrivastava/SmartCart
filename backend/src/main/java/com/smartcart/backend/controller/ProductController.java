@@ -51,13 +51,13 @@ public class ProductController {
         return product.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
-        List<Product> products = productService.getProductsByCategory(category);
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable String category) {
+        List<Product> products = productRepository.findByCategoryIgnoreCase(category);
         return ResponseEntity.ok(products);
     }
-    
+
     @GetMapping("/search")
     public ResponseEntity<List<Product>> searchProducts(@RequestParam String q) {
         List<Product> products = productService.searchProducts(q);
@@ -165,7 +165,14 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable String category) {
+        List<Product> products = productRepository.findByCategoryIgnoreCase(category);
+        return ResponseEntity.ok(products);
+    }
+
+
     @PutMapping("/admin/{id}/rating")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, Object>> updateProductRating(

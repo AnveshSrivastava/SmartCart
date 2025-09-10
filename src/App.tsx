@@ -1,6 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence, easeInOut } from 'framer-motion'; // ⬅️ import easing
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -33,14 +32,15 @@ const pageVariants = {
 
 const pageTransition = {
   duration: 0.3,
-  ease: 'easeInOut',
+  ease: easeInOut, // ✅ use easing function instead of string
 };
 
 function App() {
+  const location = useLocation(); // ✅ safer than using window.location
+
   return (
     <AuthProvider>
       <CartProvider>
-        <Router>
           <div className="min-h-screen bg-gray-50">
             <Navbar />
             
@@ -260,7 +260,7 @@ function App() {
               </Routes>
             </AnimatePresence>
 
-            {!window.location.pathname.startsWith('/admin') && (
+            {!location.pathname.startsWith('/admin') && (
               <>
                 <Footer />
                 <ChatbotWidget />
@@ -268,7 +268,6 @@ function App() {
             )}
             <Toaster position="top-right" />
           </div>
-        </Router>
       </CartProvider>
     </AuthProvider>
   );

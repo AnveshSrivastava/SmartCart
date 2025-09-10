@@ -5,7 +5,6 @@ import {
   Search, 
   Edit, 
   Trash2, 
-  Eye, 
   Package,
   Filter,
   MoreHorizontal

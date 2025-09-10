@@ -33,4 +33,7 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     
     @Query("{'$and': [{'active': true}, {'rating': {$gte: ?0}}]}")
     List<Product> findByRatingGreaterThanEqual(Double rating);
+
+    List<Product> findByCategoryIgnoreCase(String category);
+
 } 

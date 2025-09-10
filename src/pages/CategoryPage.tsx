@@ -63,7 +63,7 @@ const CategoryPage: React.FC = () => {
           return b.rating - a.rating;
         case 'name':
         default:
-          return a.name.localeCompare(b.name);
+          return a.title.localeCompare(b.title);
       }
     });
 

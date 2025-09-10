@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product, Order, User, CartItem, AdminStats } from '../types';
+import { Product, AdminStats } from '../types';
 
 // API Configuration
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
@@ -71,7 +71,7 @@ export const authAPI = {
 
 // Products API
 export const productsAPI = {
-  getAll: async (page = 0, size = 20) => {
+  getAll: async (page = 0, size = 50) => {
     const response = await api.get(`/products?page=${page}&size=${size}`);
     return response.data;
   },
@@ -261,7 +261,7 @@ export const adminAPI = {
 export default api;
 
 // Legacy API functions for backward compatibility
-export const sendChatMessage = async (message: string) => {
+export const sendChatMessage = async () => {
   // Mock chatbot response - replace with actual AI service integration
   return new Promise((resolve) => {
     setTimeout(() => {
