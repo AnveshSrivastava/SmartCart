@@ -67,6 +67,26 @@ export interface ChatMessage {
   type: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  products?: ChatProduct[];
+}
+
+export interface ChatProduct {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+}
+
+export interface ChatRequest {
+  conversationId: string;
+  message: string;
+}
+
+export interface ChatResponse {
+  reply: string;
+  products: ChatProduct[];
+  conversationId: string;
 }
 
 export interface AuthContextType {

@@ -260,22 +260,30 @@ export const adminAPI = {
 
 export default api;
 
+// Chat API
+export const chatAPI = {
+  sendMessage: async (conversationId: string, message: string) => {
+    const response = await api.post('/chat', { conversationId, message });
+    return response.data;
+  }
+};
+
 // Legacy API functions for backward compatibility
-export const sendChatMessage = async () => {
-  // Mock chatbot response - replace with actual AI service integration
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const responses = [
-        "Hello! How can I help you today?",
-        "I'm here to assist you with your shopping needs.",
-        "Feel free to ask me about our products or services.",
-        "Is there anything specific you're looking for?",
-        "I can help you find the perfect product for your needs."
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      resolve({ message: randomResponse });
-    }, 1000);
-  });
+export const sendChatMessage = async (message: string, conversationId?: string) => {
+  const id = conversationId || generateConversationId();
+  const response = await chatAPI.sendMessage(id, message);
+  return {
+    id: Math.random().toString(36).substr(2, 9),
+    type: 'assistant',
+    content: response.reply,
+    timestamp: new Date(),
+    products: response.products
+  };
+};
+
+// Helper function to generate conversation ID
+const generateConversationId = () => {
+  return 'conv_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 };
 
 export const fetchProductsByCategory = async (category: string) => {

@@ -63,7 +63,11 @@ public class User implements UserDetails {
     
     @LastModifiedDate
     private LocalDateTime updatedAt;
-    
+
+    public List<Role> getRoles() {
+        return List.of(role);
+    }
+
     public enum Role {
         USER, ADMIN
     }

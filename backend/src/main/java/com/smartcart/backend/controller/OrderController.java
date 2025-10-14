@@ -101,13 +101,15 @@ public class OrderController {
     @GetMapping("/admin/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Order>> getAllOrders(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        
-        log.info("Admin fetching all orders");
-        // This would need to be implemented in OrderService
-        return ResponseEntity.ok(List.of());
-    }
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size) {
+    
+    log.info("Admin fetching all orders");
+    Pageable pageable = PageRequest.of(page, size);
+    Page<Order> orderPage = orderService.getAllOrdersPaginated(pageable);
+    return ResponseEntity.ok(orderPage.getContent());
+}
+
     
     @GetMapping("/admin/status/{status}")
     @PreAuthorize("hasRole('ADMIN')")

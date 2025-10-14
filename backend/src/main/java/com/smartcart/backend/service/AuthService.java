@@ -78,18 +78,19 @@ public class AuthService {
     
     public AuthResponse login(AuthRequest request) {
         try {
-            // Authenticate user
+            // 1️⃣ Authenticate credentials (email + password)
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
             );
-            
-            // Load user details
-            User user = (User) userDetailsService.loadUserByUsername(request.getEmail());
-            
-            // Generate tokens
+
+            // 2️⃣ Fetch actual user entity from DB
+            User user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+            // 3️⃣ Generate tokens
             String token = jwtUtil.generateToken(user, user.getId(), user.getRole().name());
             String refreshToken = jwtUtil.generateRefreshToken(user);
-            
+
             return AuthResponse.builder()
                     .success(true)
                     .token(token)
@@ -100,7 +101,7 @@ public class AuthService {
                     .role(user.getRole().name())
                     .message("Login successful")
                     .build();
-                    
+
         } catch (Exception e) {
             log.error("Error during login: {}", e.getMessage());
             return AuthResponse.builder()
@@ -109,7 +110,8 @@ public class AuthService {
                     .build();
         }
     }
-    
+
+
     public AuthResponse refreshToken(String refreshToken) {
         try {
             if (jwtUtil.isTokenValid(refreshToken)) {

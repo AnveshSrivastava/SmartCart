@@ -18,6 +18,6 @@ public interface UserRepository extends MongoRepository<User, String> {
     @Query("{'role': ?0}")
     List<User> findByRole(User.Role role);
     
-    @Query("{'active': true}")
+    @Query("{'enabled': true}")
     List<User> findActiveUsers();
 } 

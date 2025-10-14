@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, Send, X, MessageCircle } from 'lucide-react';
+import { Bot, Send, X, MessageCircle, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChatMessage } from '../types';
-import { sendChatMessage } from '../services/api';
+import { ChatMessage, ChatProduct } from '../types';
+import { chatAPI } from '../services/api';
 
 const ChatbotWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +19,7 @@ const ChatbotWidget: React.FC = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [conversationId] = useState(() => 'conv_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now());
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -44,8 +45,15 @@ const ChatbotWidget: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response: ChatMessage = await sendChatMessage(inputMessage); // ✅ typecast
-      setMessages((prev: ChatMessage[]) => [...prev, response]);
+      const response = await chatAPI.sendMessage(conversationId, inputMessage);
+      const assistantMessage: ChatMessage = {
+        id: Math.random().toString(36).substr(2, 9),
+        type: 'assistant',
+        content: response.reply,
+        timestamp: new Date(),
+        products: response.products,
+      };
+      setMessages((prev: ChatMessage[]) => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: ChatMessage = {
@@ -66,6 +74,40 @@ const ChatbotWidget: React.FC = () => {
       handleSendMessage();
     }
   };
+
+  const ProductCard: React.FC<{ product: ChatProduct }> = ({ product }) => (
+    <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex space-x-3">
+        <div className="flex-shrink-0">
+          <img
+            src={product.imageUrl || '/placeholder-product.jpg'}
+            alt={product.title}
+            className="w-12 h-12 object-cover rounded-md"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/placeholder-product.jpg';
+            }}
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="text-sm font-medium text-gray-900 truncate">{product.title}</h4>
+          <p className="text-xs text-gray-500 capitalize">{product.category}</p>
+          <p className="text-sm font-semibold text-blue-600">₹{product.price.toLocaleString()}</p>
+        </div>
+        <div className="flex-shrink-0">
+          <Button
+            size="sm"
+            className="h-8 w-8 p-0 bg-blue-600 hover:bg-blue-700"
+            onClick={() => {
+              // TODO: Add to cart functionality
+              console.log('Add to cart:', product.id);
+            }}
+          >
+            <ShoppingCart className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -129,16 +171,28 @@ const ChatbotWidget: React.FC = () => {
                           }`}
                         >
                           <p className="text-sm">{message.content}</p>
+                          {message.products && message.products.length > 0 && (
+                            <div className="mt-3 space-y-2">
+                              <div className="grid grid-cols-1 gap-2">
+                                {message.products.map((product) => (
+                                  <ProductCard key={product.id} product={product} />
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
                     {isLoading && (
                       <div className="flex justify-start">
                         <div className="bg-gray-100 p-3 rounded-lg rounded-bl-sm">
-                          <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="flex items-center space-x-2">
+                            <div className="flex space-x-1">
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            </div>
+                            <span className="text-xs text-gray-500">Assistant is typing...</span>
                           </div>
                         </div>
                       </div>

@@ -27,6 +27,9 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     
     @Query("{'$and': [{'active': true}, {'category': ?0}, {'price': {$gte: ?1, $lte: ?2}}]}")
     List<Product> findByCategoryAndPriceRange(String category, BigDecimal minPrice, BigDecimal maxPrice);
+
+    @Query("{'$and': [{'active': true}, {'category': {$regex: ?0, $options: 'i'}}, {'price': {$gte: ?1, $lte: ?2}}]}")
+    List<Product> findByCategoryRegexAndPriceRange(String category, BigDecimal minPrice, BigDecimal maxPrice);
     
     @Query("{'$and': [{'active': true}, {'stock': {$gt: 0}}]}")
     List<Product> findAvailableProducts();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { CreditCard, MapPin, User, Mail, Phone, CheckCircle } from 'lucide-react';
+import { CreditCard, MapPin, User, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -83,8 +83,10 @@ const Checkout: React.FC = () => {
     } catch (error) {
       setLoading(false);
       console.error('Error placing order:', error);
-      const errorMessage = error?.response?.data?.message || 'Failed to place order. Please try again.';
-      toast.error(errorMessage);
+      const errorMessage =
+        (error && typeof error === 'object' && 'response' in error && (error.response as { data?: { message?: string } })?.data?.message) ||
+        'Failed to place order. Please try again.';
+      toast.error(String(errorMessage));
     }
   };
 
@@ -137,7 +139,7 @@ const Checkout: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 pt-20">
+    <div className="min-h-screen bnt-to-brg-gradie from-blue-50 to-purple-50 pt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -259,6 +261,7 @@ const Checkout: React.FC = () => {
                       required
                     />
                   </div>
+                  <input type="radio" name="" id="" />
                 </CardContent>
               </Card>
 

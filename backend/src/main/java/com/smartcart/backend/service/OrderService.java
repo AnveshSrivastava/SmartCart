@@ -116,6 +116,11 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+public Page<Order> getAllOrdersPaginated(Pageable pageable) {
+    return orderRepository.findAll(pageable);
+}
+
     
     private OrderItem convertCartItemToOrderItem(CartItem cartItem) {
         return OrderItem.builder()

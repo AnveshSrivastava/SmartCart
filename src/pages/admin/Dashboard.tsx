@@ -6,8 +6,6 @@ import {
   DollarSign, 
   AlertTriangle,
   TrendingUp,
-  Users,
-  Eye,
   Edit
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

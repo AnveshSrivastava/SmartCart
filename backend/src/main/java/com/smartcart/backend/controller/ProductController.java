@@ -2,9 +2,11 @@ package com.smartcart.backend.controller;
 
 import com.smartcart.backend.dto.ProductDTO;
 import com.smartcart.backend.model.Product;
+import com.smartcart.backend.repository.ProductRepository;
 import com.smartcart.backend.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +29,8 @@ import java.util.Optional;
 public class ProductController {
     
     private final ProductService productService;
-    
+    private final ProductRepository productRepository;
+
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
@@ -50,12 +53,6 @@ public class ProductController {
         Optional<Product> product = productService.getProductById(id);
         return product.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> getByCategory(@PathVariable String category) {
-        List<Product> products = productRepository.findByCategoryIgnoreCase(category);
-        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/search")

@@ -34,8 +34,6 @@ public class BackendApplication {
 				userRepository.save(admin);
 				System.out.println("✅ Admin user created: admin@smartcart.com / admin123");
 			}
-
-			// Create demo user
 			if (!userRepository.existsByEmail("demo@smartcart.com")) {
 				User demoUser = User.builder()
 					.fullName("Demo User")
