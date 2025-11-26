@@ -1,10 +1,10 @@
-# Use OpenJDK 20 as base image
-FROM openjdk:20-jdk-slim
-
-# Set working directory
+# =============================
+# 1. Build Stage
+# =============================
+FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
+# Copy Maven wrapper and project files
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
@@ -21,14 +21,15 @@ COPY src src
 # Build the application
 RUN ./mvnw clean package -DskipTests
 
-# Create a new stage for runtime
-FROM openjdk:20-jre-slim
 
-# Set working directory
+# =============================
+# 2. Runtime Stage
+# =============================
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 # Copy the built JAR from the build stage
-COPY --from=0 /app/target/*.jar app.jar
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/backend.jar
 
 # Expose port
 EXPOSE 8080
@@ -37,4 +38,4 @@ EXPOSE 8080
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"] 
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar backend.jar"]

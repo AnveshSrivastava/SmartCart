@@ -3,7 +3,6 @@ package com.smartcart.backend;
 import com.smartcart.backend.model.User;
 import com.smartcart.backend.repository.UserRepository;
 import com.smartcart.backend.repository.ProductRepository;
-import com.smartcart.backend.model.Product;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

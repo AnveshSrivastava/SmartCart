@@ -33,7 +33,7 @@ const About: React.FC = () => {
     {
       name: 'Anvesh Srivastava',
       role: 'Founder & CEO',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300',
+      image: 'https://drive.google.com/file/d/1E8Ao1gZF2y1HhCT3dgFL79oKCxDA6TeR/view?usp=drive_open',
       description: 'Visionary leader with 10+ years in e-commerce and AI technology.',
     },
     {

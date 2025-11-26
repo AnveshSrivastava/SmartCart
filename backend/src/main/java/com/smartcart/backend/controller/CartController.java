@@ -2,7 +2,6 @@ package com.smartcart.backend.controller;
 
 import com.smartcart.backend.model.Cart;
 import com.smartcart.backend.service.CartService;
-import com.smartcart.backend.util.JwtUtil;
 import com.smartcart.backend.repository.UserRepository;
 import com.smartcart.backend.model.User;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ import java.util.Map;
 public class CartController {
     
     private final CartService cartService;
-    private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     
     @GetMapping

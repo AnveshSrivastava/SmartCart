@@ -3,8 +3,12 @@ package com.smartcart.backend.controller;
 import com.smartcart.backend.dto.AuthRequest;
 import com.smartcart.backend.dto.AuthResponse;
 import com.smartcart.backend.service.AuthService;
+import com.smartcart.backend.util.JwtUtil;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +22,8 @@ import java.util.Map;
 @Slf4j
 @CrossOrigin(origins = "*")
 public class AuthController {
+    @Autowired
+    private JwtUtil jwtUtil;
     private final AuthService authService;
     
     @PostMapping("/register")
@@ -68,20 +74,32 @@ public class AuthController {
         return ResponseEntity.status(401).body(errorResponse);
     }
     
-    @GetMapping("/validate")
-    public ResponseEntity<Map<String, Object>> validateToken(@RequestHeader("Authorization") String authHeader) {
-        Map<String, Object> response = new HashMap<>();
-        
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7);
-            // Token validation is handled by the JWT filter
-            response.put("valid", true);
-            response.put("message", "Token is valid");
-            return ResponseEntity.ok(response);
-        }
-        
+   @GetMapping("/validate")
+public ResponseEntity<Map<String, Object>> validateToken(@RequestHeader("Authorization") String authHeader) {
+    
+    Map<String, Object> response = new HashMap<>();
+
+    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
         response.put("valid", false);
         response.put("message", "No token provided");
         return ResponseEntity.status(401).body(response);
     }
-} 
+
+    String token = authHeader.substring(7);
+
+    boolean isValid = jwtUtil.isTokenValid(token);
+
+    if (isValid) {
+        response.put("valid", true);
+        response.put("message", "Token is valid");
+        response.put("username", jwtUtil.extractUsername(token));
+        response.put("role", jwtUtil.extractRole(token));
+        response.put("userId", jwtUtil.extractUserId(token));
+        return ResponseEntity.ok(response);
+    } else {
+        response.put("valid", false);
+        response.put("message", "Token is invalid or expired");
+        return ResponseEntity.status(401).body(response);
+    }
+}
+}
