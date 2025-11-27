@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, easeInOut } from 'framer-motion'; // ⬅️ import easing
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from './context/AuthContext';

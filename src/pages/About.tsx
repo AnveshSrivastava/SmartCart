@@ -4,6 +4,7 @@ import { Bot, Users, Target, Award, Zap, Heart, Shield, Globe } from 'lucide-rea
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import AnveshImg from '../assets/Anvesh.png';
 
 const About: React.FC = () => {
   const features = [
@@ -33,7 +34,7 @@ const About: React.FC = () => {
     {
       name: 'Anvesh Srivastava',
       role: 'Founder & CEO',
-      image: 'https://drive.google.com/file/d/1E8Ao1gZF2y1HhCT3dgFL79oKCxDA6TeR/view?usp=drive_open',
+      image: AnveshImg,
       description: 'Visionary leader with 10+ years in e-commerce and AI technology.',
     },
     {

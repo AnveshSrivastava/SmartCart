@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '../context/AuthContext';
+import { toast } from 'sonner';
 
 const Signup: React.FC = () => {
   const [name, setName] = useState('');
@@ -19,24 +20,65 @@ const Signup: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
+  e.preventDefault();
 
-    setLoading(true);
+  // Collect validation errors
+  const errors: Record<string, string> = {};
 
-    try {
-      await register(email, password, name);
-      navigate('/');
-    } catch (error) {
-      console.error('Registration error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Name validation
+  if (!name.trim()) {
+    errors.name = "Full name is required.";
+  } else if (name.trim().length < 3) {
+    errors.name = "Name must be at least 3 characters.";
+  }
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!emailRegex.test(email)) {
+    errors.email = "Please enter a valid email address.";
+  }
+
+  // Password validation
+  if (!password) {
+    errors.password = "Password is required.";
+  } else if (password.length < 6) {
+    errors.password = "Password must be at least 6 characters long.";
+  } else if (!/[A-Z]/.test(password)) {
+    errors.password = "Password must contain at least one uppercase letter.";
+  } else if (!/[0-9]/.test(password)) {
+    errors.password = "Password must contain at least one number.";
+  }
+
+  // Confirm password validation
+  if (!confirmPassword) {
+    errors.confirmPassword = "Please confirm your password.";
+  } else if (password !== confirmPassword) {
+    errors.confirmPassword = "Passwords do not match.";
+  }
+
+  // If any errors exist, show them and stop submission
+  if (Object.keys(errors).length > 0) {
+    Object.values(errors).forEach((msg) => toast.error(msg));
+    return;
+  }
+
+  // Submit request
+  setLoading(true);
+
+  try {
+    await register(email, password, name);
+    toast.success("Account created successfully!");
+    navigate("/");
+  } catch (error) {
+    console.error("Registration error:", error);
+    toast.error("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">

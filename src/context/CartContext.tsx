@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { Cart, CartItem, Product } from '../types';
+import { Cart, CartItem } from '../types';
 import { cartAPI } from '../services/api';
 import { useAuth } from './AuthContext';
 import { toast } from 'sonner';
+import { AxiosError } from 'axios';
 
 interface CartContextType {
   items: CartItem[];
@@ -80,9 +81,22 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       if (item) {
         toast.success(`Added ${item.productTitle} to cart`);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error adding to cart:', error);
-      const errorMessage = error?.response?.data?.message || 'Failed to add item to cart';
+
+      let message: string;
+
+      if ((error as AxiosError)?.isAxiosError) {
+        const axiosErr = error as AxiosError;
+        message =
+          (axiosErr.response?.data as { message?: string } | undefined)?.message ??
+          axiosErr.message ??
+          'Failed to add item to cart';
+      } else {
+        message = (error as Error)?.message ?? 'Failed to add item to cart';
+      }
+
+      const errorMessage = message;
       toast.error(errorMessage);
     } finally {
       setLoading(false);

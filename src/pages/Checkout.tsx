@@ -72,7 +72,9 @@ const Checkout: React.FC = () => {
       
       setLoading(false);
       setShowConfirmation(true);
+      if(order){
       toast.success('Order placed successfully!');
+      }
       
       // Clear cart after successful order
       setTimeout(() => {

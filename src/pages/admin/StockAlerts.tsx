@@ -6,8 +6,7 @@ import {
   Edit, 
   Package,
   TrendingDown,
-  RefreshCw,
-  Eye
+  RefreshCw
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -34,7 +33,7 @@ import { Product } from '../../types';
 import { toast } from 'sonner';
 
 const StockAlerts: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [, setProducts] = useState<Product[]>([]);
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,6 +48,7 @@ const StockAlerts: React.FC = () => {
 
   useEffect(() => {
     filterProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lowStockProducts, searchTerm]);
 
   const loadProducts = async () => {

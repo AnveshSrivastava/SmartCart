@@ -33,13 +33,13 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { productsAPI } from '../../services/api';
 import { Product } from '../../types';
 import { toast } from 'sonner';
 import ProductForm from '../../components/admin/ProductForm';
+import { AxiosError } from 'axios';
 
 const ProductManagement: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -57,6 +57,7 @@ const ProductManagement: React.FC = () => {
 
   useEffect(() => {
     filterProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products, searchTerm, selectedCategory]);
 
   const loadProducts = async () => {
@@ -110,9 +111,22 @@ const ProductManagement: React.FC = () => {
       await productsAPI.delete(product.id);
       toast.success('Product deleted successfully');
       loadProducts();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error deleting product:', error);
-      const errorMessage = error?.response?.data?.message || 'Failed to delete product';
+
+      let message: string;
+
+      if ((error as AxiosError)?.isAxiosError) {
+        const axiosErr = error as AxiosError;
+        message =
+          (axiosErr.response?.data as { message?: string } | undefined)?.message ??
+          axiosErr.message ??
+          'Failed to delete product';
+      } else {
+        message = (error as Error)?.message ?? 'Failed to delete product';
+      }
+
+      const errorMessage = message;
       toast.error(errorMessage);
     }
   };

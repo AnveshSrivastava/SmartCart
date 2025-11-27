@@ -3,6 +3,7 @@ import { User, AuthContextType } from '../types';
 import { authAPI } from '../services/api';
 import { toast } from 'sonner';
 import { jwtDecode } from 'jwt-decode';
+import { AxiosError } from 'axios';
 
 interface JWTPayload {
   sub: string;
@@ -93,9 +94,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error(response.message || 'Login failed');
       }
       
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
-      const errorMessage = error?.response?.data?.message || error?.message || 'Invalid credentials. Please try again.';
+
+      let message: string;
+
+      if ((error as AxiosError)?.isAxiosError) {
+        const axiosErr = error as AxiosError;
+        message =
+          (axiosErr.response?.data as { message?: string } | undefined)?.message ??
+          axiosErr.message ??
+          'Invalid credentials. Please try again.';
+      } else {
+        message = (error as Error)?.message ?? 'Invalid credentials. Please try again.';
+      }
+
+      const errorMessage = message;
       toast.error(errorMessage);
       throw error;
     } finally {
@@ -126,9 +140,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error(response.message || 'Registration failed');
       }
       
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Registration error:', error);
-      const errorMessage = error?.response?.data?.message || error?.message || 'Registration failed. Please try again.';
+
+      let message: string;
+
+      if ((error as AxiosError)?.isAxiosError) {
+        const axiosErr = error as AxiosError;
+        message =
+          (axiosErr.response?.data as { message?: string } | undefined)?.message ??
+          axiosErr.message ??
+          'Registration failed. Please try again.';
+      } else {
+        message = (error as Error)?.message ?? 'Registration failed. Please try again.';
+      }
+
+      const errorMessage = message;
       toast.error(errorMessage);
       throw error;
     } finally {

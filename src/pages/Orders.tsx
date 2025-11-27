@@ -165,7 +165,7 @@ const Orders: React.FC = () => {
 
                       {/* Order Actions */}
                       <div className="flex space-x-2 pt-4 border-t">
-                        {order.status === 'delivered' && (
+                        {String(order.status) === 'delivered' && (
                           <Button variant="outline" size="sm">
                             Reorder
                           </Button>
@@ -173,7 +173,7 @@ const Orders: React.FC = () => {
                         <Button variant="outline" size="sm">
                           View Details
                         </Button>
-                        {order.status === 'shipped' && (
+                        {String(order.status) === 'shipped' && (
                           <Button variant="outline" size="sm">
                             Track Package
                           </Button>

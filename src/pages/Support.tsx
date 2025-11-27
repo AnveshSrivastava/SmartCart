@@ -105,7 +105,7 @@ const Support: React.FC = () => {
     e.preventDefault();
     
     // Simulate form submission
-    toast.success('Your message has been sent! We\'ll get back to you within 2 hours.');
+    toast.success('Your message has been sent! We\'ll get back to you as soon as possible.');
     
     // Reset form
     setContactForm({
@@ -178,7 +178,7 @@ const Support: React.FC = () => {
                         } else if (method.title === 'Email Support') {
                           document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
                         } else {
-                          toast.info('Phone support: +1 (555) 123-4567');
+                          toast.info('Phone support: +91 93361 07266');
                         }
                       }}
                     >
