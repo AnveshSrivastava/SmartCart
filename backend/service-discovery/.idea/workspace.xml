@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aacdea7a-3ba7-4f9c-83d5-edd7c99a9e08" name="Changes" comment="Added userId in claims and added X-USER_ID header - Oct 28">
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/OrderAndCartManagementApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/OrderAndCartManagementApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/client/ProductClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/client/ProductClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/AddToCartRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/AddToCartRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/AddToCartResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/AddToCartResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/CartResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/CartResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/dto/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/exception/BadRequestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/model/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/model/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/model/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/model/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/repository/CartItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/repository/CartItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/repository/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/java/online/threadly/order_and_cart_management/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-and-cart-management/src/test/java/online/threadly/order_and_cart_management/OrderAndCartManagementApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-order-and-cart-management/src/test/java/online/threadly/order_and_cart_management/OrderAndCartManagementApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/dao/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/dao/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/exception/BadRequestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/exception/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/java/online/threadly/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/java/online/threadly/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product/src/test/java/online/threadly/product/ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-product/src/test/java/online/threadly/product/ApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/online/threadly/service_discovery/ServiceDiscoveryApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/online/threadly/service_discovery/ServiceDiscoveryApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threadly-api-gateway/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-api-gateway/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threadly-api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/controller/HealthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/controller/HealthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/dao/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/dao/AuthResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/dao/SignInRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/dao/SignInRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/dao/SignUpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/dao/SignUpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/filter/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/filter/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/java/online/threadly/user_authentication/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/java/online/threadly/user_authentication/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-authentication/src/test/java/online/threadly/user_authentication/ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../threadly-user-authentication/src/test/java/online/threadly/user_authentication/ApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="32sVkdYGoVTb88ujS4zUMfADra4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Application.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OrderAndCartManagementApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServiceDiscoveryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ThreadlyApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.online.threadly.user_authentication.Application.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aakashverma/Documents/innoskrit-classes/abesec/abesec-batch-2027/ecommerce-app/backend/order-and-cart-management&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../order-and-cart-management" />
+      <recent name="$PROJECT_DIR$/../threadly-api-gateway" />
+      <recent name="$PROJECT_DIR$/../threadly-api-gateway/src/main/java/online/threadly/api_gateway" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.OrderAndCartManagementApplication">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="online.threadly.product.Application" />
+      <module name="threadly-product" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="online.threadly.product.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderAndCartManagementApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="online.threadly.order_and_cart_management.OrderAndCartManagementApplication" />
+      <module name="threadly-order-and-cart-management" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="online.threadly.order_and_cart_management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceDiscoveryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="online.threadly.service_discovery.ServiceDiscoveryApplication" />
+      <module name="threadly-service-discovery" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="online.threadly.service_discovery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadlyApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="online.threadly.api_gateway.ThreadlyApiGatewayApplication" />
+      <module name="threadly-api-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="online.threadly.api_gateway.filter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="online.threadly.user_authentication.Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="online.threadly.user_authentication.Application" />
+      <module name="threadly-user-authentication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="online.threadly.user_authentication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="threadly-service-discovery" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="threadly-service-discovery" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="threadly-service-discovery" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="threadly-service-discovery" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="threadly-service-discovery" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="threadly-service-discovery" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.OrderAndCartManagementApplication" />
+        <item itemvalue="Application.Application" />
+        <item itemvalue="Application.online.threadly.user_authentication.Application" />
+        <item itemvalue="Application.ThreadlyApiGatewayApplication" />
+        <item itemvalue="Application.ServiceDiscoveryApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aacdea7a-3ba7-4f9c-83d5-edd7c99a9e08" name="Changes" comment="" />
+      <created>1758209411326</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758209411326</updated>
+    </task>
+    <task id="LOCAL-00001" summary="API Gateway Completed - Sept 29">
+      <option name="closed" value="true" />
+      <created>1759160133437</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759160133437</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add to Cart Completed with Exception Handling - Oct 28">
+      <option name="closed" value="true" />
+      <created>1761664334078</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761664334079</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added userId in claims and added X-USER_ID header - Oct 28">
+      <option name="closed" value="true" />
+      <created>1761666058820</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761666058820</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="API Gateway Completed - Sept 29" />
+    <MESSAGE value="Add to Cart Completed with Exception Handling - Oct 28" />
+    <MESSAGE value="Added userId in claims and added X-USER_ID header - Oct 28" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added userId in claims and added X-USER_ID header - Oct 28" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../threadly-api-gateway/src/main/java/online/threadly/api_gateway/filter/RequireAdminRoleFilter.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

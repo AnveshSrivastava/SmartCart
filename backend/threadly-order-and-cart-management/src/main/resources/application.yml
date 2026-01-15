@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: threadly-order-and-cart-management
+  profiles:
+    active: local
+server:
+  port: 8084
